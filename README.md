@@ -1,4 +1,4 @@
-# WOT-java-simple
+# Tanks
 First try of making game using JavaFX.
 
 Needs to run the Server java file firstly.
