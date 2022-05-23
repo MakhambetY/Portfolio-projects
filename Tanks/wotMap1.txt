@@ -1,0 +1,17 @@
+16
+S S S S S S S S S S S S S S S S
+S 0 0 0 0 0 0 0 0 0 0 0 0 0 0 S
+S 0 0 S S S S B B S S S S 0 0 S
+S 0 0 B W W W B B W W W B 0 0 S
+S 0 0 B W 0 0 0 0 0 0 W B 0 0 S
+S B B B W 0 0 P 0 0 0 W B B B S
+S B B B W W W B B W W W B B B S
+S 0 0 0 0 0 0 0 0 0 0 0 0 0 0 S
+S 0 0 0 0 S S B B S S 0 0 0 0 S
+S B B 0 0 T T T T T T 0 0 B B S
+S T T T T T T T T T T T T T T S
+S 0 0 0 S 0 0 0 0 0 0 S 0 0 0 S
+S 0 0 0 S 0 0 0 0 0 0 S 0 0 0 S
+S 0 P 0 S 0 0 0 P 0 0 S 0 P 0 S
+S 0 0 0 S 0 0 0 0 0 0 S 0 0 0 S
+S S S S S S S S S S S S S S S S

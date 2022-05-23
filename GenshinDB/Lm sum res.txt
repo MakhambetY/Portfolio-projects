@@ -1,0 +1,10 @@
+SELECT p.name, res.resources
+FROM Players p,
+(
+SELECT kv.acc_id, mob_id, loot,
+sum(CASE WHEN strftime('%m', log_date) = '12' THEN loot ELSE 0 END) OVER (PARTITION by kv.acc_id) "resources"
+FROM Players p, Kills_log_v_loot_res kv
+WHERE p.acc_id = kv.acc_id AND strftime('%m', log_date) = '12'
+) res
+WHERE p.acc_id = res.acc_id AND p.user_id = 334 AND p.server_id = 3
+GROUP BY res.acc_id;

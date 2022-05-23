@@ -1,0 +1,9 @@
+SELECT tn.Time, tn.Number
+FROM Players p, 
+(
+SELECT kv.acc_id ,strftime('%m/%d %H:%M', log_date) "Time", loot "Number"
+FROM Kills_log_v_loot_res kv
+WHERE strftime('%m', log_date) = '12'
+ORDER BY "Time" DESC
+) tn
+WHERE p.acc_id = tn.acc_id AND user_id = 334 AND server_id = 3;

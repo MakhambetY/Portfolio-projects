@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        font-family: "Work Sans", sans-serif;
+      }
+
+      body {
+        background-image: url("https://www.10wallpaper.com/wallpaper/1366x768/1203/milky_way-Space_exploration_secret_wallpaper_1366x768.jpg");
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+      }
+
+      #login {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      #genders {
+        justify-content: space-around;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      #gender {
+        position: relative;
+      }
+
+      section {
+        /* opacity: 1; */
+        background-image: linear-gradient(black, gray);
+        border: black 2px solid;
+        border-radius: 5%;
+        width: 30%;
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        /*margin-left:auto;
+        margin-right:auto;*/
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+      }
+      h2 {
+        font-family: "Archivo Black", sans-serif;
+        color: #e0dada;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .info {
+        width: 100%;
+        /* padding 5px; */
+        text-align: center;
+        min-height: 45px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .info.error {
+        border: 1px solid #a90e00;
+        background-color: #ff3c41;
+        color: #a90e00;
+      }
+      .info p {
+        margin: auto;
+        padding: 5px;
+      }
+      .info.good {
+        border: 1px solid #416d50;
+        background-color: #47cf73;
+        color: #416d50;
+      }
+
+      input {
+        height: 35px;
+        padding: 5px 5px;
+        margin: 10px 0px;
+        background-color: #e0dada;
+        border: none;
+      }
+
+      #male,
+      #female {
+        margin-bottom: -5%;
+        padding: 0;
+      }
+
+      button {
+        height: 40px;
+        padding: 5px 5px;
+        margin: 10px 0px;
+        font-weight: bold;
+        background-image: linear-gradient(white, gray);
+        border: none;
+        color: #464242;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #711f1b;
+      }
+
+      #checkbox p {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #checkbox input {
+        padding-top: -10%;
+      }
+
+      #checkbox label {
+        margin-bottom: 0%;
+        height: 10px;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      input {
+        width: 100%;
+      }
+
+      #checkbox {
+        display: inline-flex;
+        justify-content: center;
+        max-height: auto;
+        padding: 15px;
+        width: 100%;
+        font-family: montserrat;
+        font-size: 13px;
+      }
+
+      #comment {
+        width: 100%;
+        height: 100%;
+      }
+      .forma {
+        background-image: linear-gradient(black, gray);
+        border: black 2px solid;
+        border-radius: 5%;
+        width: 30%;
+        margin-top: 30%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (max-width: 780px) {
+        .forma {
+          width: 85%;
+          height: max-content;
+          margin-top: 200%;
+        }
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <form class="forma">
+      <div id="intro" style="text-align: center">
+        <h1>{{ timestamp }}</h1>
+      </div>
+      <div id="login">
+        <h2>Sign up</h2>
+        <div class="info" v-bind:class="good">
+          <p>{{ alert.message }}</p>
+          <p v-show="login.login && login.password">
+            {{ login.login}} / {{ login.password}}
+          </p>
+        </div>
+
+        <input type="text" v-model="login.login" placeholder="Username" />
+        <hr style="width: 100%" />
+        <input
+          type="password"
+          v-model="login.password"
+          placeholder="Password"
+        />
+        <input
+          type="text"
+          v-model="login.password"
+          placeholder="Your password"
+        />
+      </div>
+      <div id="genders">
+        <div id="gender">
+          <input
+            @click="visib"
+            type="radio"
+            id="male"
+            name="sex"
+            value="male"
+          />
+          <p id="mal">{{ genderm }}</p>
+        </div>
+        <div id="gender">
+          <input
+            @click="visibf"
+            type="radio"
+            id="female"
+            name="sex"
+            value="female"
+          />
+          <p id="fem">{{ genderf }}</p>
+        </div>
+      </div>
+      <div id="birthday-box">
+        <label for="birthday" style="margin-bottom: 10px">Birthday:</label>
+        <input
+          type="date"
+          id="birthday"
+          name="birthday"
+          placeholder="birthday"
+          style="width: 73%"
+        />
+      </div>
+
+      <input
+        type="number"
+        id="age-field"
+        name="age"
+        min="5"
+        max="100"
+        placeholder="Your age:"
+      />
+
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Enter your tel: +7-(7XX)-XXX-XXXX"
+        pattern="+7-([0-9]{3})-[0-9]{3}-[0-9]{4}"
+      />
+
+      <div id="selection">
+        <label for="status">Select your status:</label>
+        <select
+          name="status"
+          id="status"
+          aria-placeholder="status"
+          v-model="key"
+          @change="onChange($event)"
+        >
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+          <option value="none">None</option>
+        </select>
+        <p style="margin-left: 10px; font-weight: bold">Selected: {{key}}</p>
+      </div>
+
+      <div id="selection">
+        <label for="status">Photo:</label>
+        <input type="file" id="myfile" name="myfile" />
+      </div>
+
+      <div id="about">
+        <textarea
+          name="comment"
+          id="comment"
+          cols="30"
+          rows="1"
+          maxlength="255"
+          v-model="message"
+          @keyup="charCount()"
+          placeholder="Write something about you:"
+        ></textarea>
+        <i id="counter" style="font-weight: bold">
+          Length:{{totalcharacter}}/255
+        </i>
+      </div>
+
+      <div id="checkbox">
+        <div style="width: 5%">
+          <input
+            type="checkbox"
+            id="agreement"
+            name="agreement"
+            value="yes"
+            required
+          />
+        </div>
+        <label for="agreement" style="margin-left: 0px; margin-top: 5%"
+          >I accept the tearms of servise</label
+        >
+      </div>
+
+      <button v-on:click="onSubmit" onclick="document.location='Main.html'">
+        Sign up
+      </button>
+    </form>
+  </body>
+  <script>
+    var vue = new Vue({
+      el: "#login",
+      data: {
+        alert: {
+          message: "Write your username and password",
+        },
+        login: {
+          login: "",
+          password: "",
+          password: "",
+        },
+        shake: false,
+        good: "",
+        fake: {
+          login: "vincent",
+          password: "admin",
+        },
+      },
+      methods: {
+        onSubmit: function (event) {
+          event.preventDefault();
+          this.shake = false;
+          setTimeout(function () {
+            if (
+              this.fake.login == this.login.login &&
+              this.fake.password == this.login.password
+            ) {
+              this.alert.message = "Hello Huston!";
+            } else {
+              this.shake = true;
+              this.alert.message = "Huston, we got a problem!";
+            }
+          }, 3000);
+          console.log(this.shake);
+        },
+      },
+    });
+
+    var app = new Vue({
+      el: "#about",
+      data: {
+        message: "",
+        totalcharacter: 0,
+      },
+      methods: {
+        charCount: function () {
+          this.totalcharacter = this.message.length;
+        },
+      },
+    });
+
+    var vm = new Vue({
+      el: "#selection",
+      data: {
+        key: "",
+      },
+    });
+
+    var v = new Vue({
+      el: "#genders",
+      data: {
+        genderm: "Male",
+        genderf: "Female",
+      },
+      methods: {
+        visib() {
+          this.genderm = "I am a Male Person";
+          this.genderf = "Female";
+        },
+        visibf() {
+          this.genderf = "I am a Female Person";
+          this.genderm = "Male";
+        },
+      },
+    });
+
+    var vue_det = new Vue({
+      el: "#intro",
+      data: {
+        timestamp: "",
+      },
+      created() {
+        setInterval(this.getNow, 10);
+      },
+      methods: {
+        getNow: function () {
+          const today = new Date();
+          const date =
+            today.getFullYear() +
+            "-" +
+            (today.getMonth() + 1) +
+            "-" +
+            today.getDate();
+          const time =
+            today.getHours() +
+            ":" +
+            today.getMinutes() +
+            ":" +
+            today.getSeconds();
+          const dateTime = date + " " + time;
+          this.timestamp = dateTime;
+        },
+      },
+    });
+  </script>
+</html>

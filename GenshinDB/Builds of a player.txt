@@ -1,0 +1,3 @@
+SELECT Character, constellations, ch_lvl, friendship, Element, ch_r, Weapon, wp_lvl, refinement, wp_r, flowerN, featherN, timepieceN, cupN, headN 
+FROM player_builds_v pv, Players p
+WHERE pv.acc_id = p.acc_id AND user_id = 1 AND server_id = 2;

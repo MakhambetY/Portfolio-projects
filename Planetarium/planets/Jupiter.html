@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;1,200&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // Add smooth scrolling to all links
+        $("a").on("click", function (event) {
+          // Make sure this.hash has a value before overriding default behavior
+          if (this.hash !== "") {
+            // Prevent default anchor click behavior
+            event.preventDefault();
+
+            // Store hash
+            var hash = this.hash;
+
+            // Using jQuery's animate() method to add smooth page scroll
+            // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+            $("html, body").animate(
+              {
+                scrollTop: $(hash).offset().top,
+              },
+              800,
+              function () {
+                // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = hash;
+              }
+            );
+          } // End if
+        });
+      });
+    </script>
+    <style>
+      * {
+        box-sizing: border-box;
+        color: white;
+      }
+      html {
+        height: 100%;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        height: 100%;
+        overflow-x: hidden;
+      }
+
+      .navbar {
+        position: fixed;
+        z-index: 50;
+        width: 100%;
+      }
+
+      .head2 {
+        margin-left: 68%;
+      }
+
+      .navbar-nav .nav-item li {
+        margin-top: 50px;
+      }
+
+      #head {
+        margin-left: 10%;
+      }
+
+      /* Dropdown Button */
+      .dropbtn {
+        background-color: none;
+        color: rgb(253, 250, 250);
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+      }
+
+      /* The container <div> - needed to position the dropdown content */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Dropdown Content (Hidden by Default) */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(255, 254, 254, 0.2);
+        z-index: 1;
+      }
+
+      /* Links inside the dropdown */
+      .dropdown-content a {
+        color: rgb(255, 247, 247);
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      /* Change color of dropdown links on hover */
+      .dropdown-content a:hover {
+        background-color: #ddd;
+      }
+
+      /* Show the dropdown menu on hover */
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      /* Change the background color of the dropdown button when the dropdown content is shown */
+      .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+      }
+
+      model-viewer {
+        width: 80%;
+        height: 80%;
+        margin-top: 5%;
+        margin-left: 10%;
+      }
+
+      .model-viewer-container {
+        display: list-item;
+        justify-content: center;
+        width: 70%;
+        height: auto;
+        margin: 0;
+        background-color: black;
+      }
+
+      :root {
+        --border: 1px groove rgb(194, 194, 194);
+      }
+
+      .mainpage {
+        box-sizing: border-box;
+        display: flex;
+        padding-top: 4%;
+        width: 100%;
+        height: 95%;
+      }
+
+      .planetinfobox {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 30%;
+        height: auto;
+        background-color: black;
+        border: solid rgb(102, 102, 102) 1px;
+        overflow-y: auto;
+      }
+
+      .planetinfo {
+        position: relative;
+        display: block;
+        justify-content: center;
+        margin-top: 10%;
+        width: 80%;
+        height: 90%;
+        background-color: black;
+      }
+
+      p {
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        margin: 4px 0;
+        color: var(--fg1);
+        line-height: 1.4em;
+      }
+
+      .description {
+        margin: 5%;
+      }
+
+      .imgs {
+        width: 100%;
+        margin: 0.5em auto 1em;
+        max-width: 375px;
+        display: block;
+      }
+      h1 {
+        padding: 0 var;
+        margin-bottom: 0.15em;
+        margin-top: 0.1em;
+        pointer-events: all;
+        user-select: text;
+        font-weight: 500;
+        font-size: 2.5em;
+        line-height: 1em;
+        word-break: break-word;
+      }
+
+      .quickfacts div {
+        margin: 2%;
+      }
+
+      .quickfacts {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto auto auto;
+        gap: 0.4em 0.8em;
+        border: solid rgb(102, 102, 102) 1px;
+        border-radius: 2%;
+      }
+
+      .data-block,
+      #details-panel .data-block .data {
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+      }
+
+      #details-panel .data-block {
+        border: solid rgb(102, 102, 102) 1px;
+        grid-template-rows: 1fr;
+        gap: 0.8em;
+        justify-content: start;
+      }
+
+      .data-block .data {
+        font-weight: 400;
+        font-size: 1.6em;
+        pointer-events: all;
+        user-select: text;
+      }
+      .data-block {
+        border-bottom: solid rgb(102, 102, 102) 1px;
+        margin: 0;
+      }
+
+      .label-block {
+        border-top: 1px solid var(--separator);
+        padding-top: 0.5em;
+        color: rgb(151, 151, 151);
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        font-size: 0.8em;
+        margin-bottom: 1em;
+        text-transform: capitalize;
+      }
+
+      .color {
+        color: rgb(233, 106, 118);
+      }
+      .infolike {
+        color: white;
+      }
+
+      .moreinfo {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        background-color: rgb(233, 106, 118);
+        width: 100%;
+        height: 5%;
+        font-weight: 600;
+        font-size: 1em;
+      }
+
+      .bottompart {
+        justify-content: center;
+        background-color: rgb(236, 229, 229);
+        box-sizing: border-box;
+        position: static;
+        display: flex;
+        height: fit-content;
+        width: 100%;
+      }
+
+      .time {
+        margin: 2%;
+        font-size: 100%;
+        font: icon;
+      }
+
+      .grid_module {
+        justify-content: center;
+        display: grid;
+      }
+      .container {
+        justify-content: center;
+        margin: 0;
+        width: 100%;
+      }
+
+      .row {
+        justify-content: center;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-gap: 0px;
+        width: 100%;
+      }
+
+      .col-4 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 5%;
+        padding-bottom: 5%;
+        color: black;
+      }
+
+      .col-4:nth-child(1),
+      .col-4:nth-child(2),
+      .col-4:nth-child(3) {
+        border-bottom: var(--border);
+      }
+
+      .col-4:nth-child(7),
+      .col-4:nth-child(8),
+      .col-4:nth-child(9) {
+        border-top: var(--border);
+      }
+
+      .col-4:nth-child(1),
+      .col-4:nth-child(4),
+      .col-4:nth-child(7) {
+        border-right: var(--border);
+      }
+
+      .col-4:nth-child(3),
+      .col-4:nth-child(6),
+      .col-4:nth-child(9) {
+        border-left: var(--border);
+      }
+
+      .col-4 p {
+        text-align: center;
+      }
+
+      .count {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        background-color: #dcbfbf;
+        color: black;
+        border-radius: 50%;
+        max-width: 90px;
+        max-height: 90px;
+        width: 15%;
+        font-size: 2em;
+        margin-bottom: 8%;
+      }
+
+      .count p {
+        font-weight: 560;
+      }
+
+      h3 {
+        font-weight: 650;
+      }
+
+      #gettime {
+        font-size: 200%;
+        font-family: monospace;
+        text-align: center;
+      }
+
+      @media (max-width: 576px) {
+        [class*="col-"] {
+          width: 100%;
+        }
+
+        .model-viewer-container {
+          display: none;
+        }
+
+        .planetinfobox {
+          width: 100%;
+        }
+
+        .col-4:nth-child(1),
+        .col-4:nth-child(2),
+        .col-4:nth-child(3) {
+          border-bottom: none;
+        }
+
+        .col-4:nth-child(7),
+        .col-4:nth-child(8),
+        .col-4:nth-child(9) {
+          border-top: none;
+        }
+
+        .col-4:nth-child(1),
+        .col-4:nth-child(4),
+        .col-4:nth-child(7) {
+          border-right: none;
+        }
+
+        .col-4:nth-child(3),
+        .col-4:nth-child(6),
+        .col-4:nth-child(9) {
+          border-left: none;
+        }
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700|Raleway:300,400"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      .fancybox-margin {
+        margin-right: 17px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="head">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+          <div class="container-fluid">
+            <a class="navbar-brand" id="head" href="#">Planetarium</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <a class="" href=""
+                ><img
+                  style="width: 70px; height: 70px"
+                  src="https://solarsystem.nasa.gov/assets/orrery_icon.svg"
+                  alt=""
+              /></a>
+              <div class="head2">
+                <ul class="navbar-nav">
+                  <li class="nav-item" style="margin-right: 10%">
+                    <button
+                      class="btn btn-outline-light"
+                      onclick="document.location='Main.html'"
+                    >
+                      Home
+                    </button>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <div class="dropdown">
+                      <button class="btn btn-outline-light">Dropdown</button>
+                      <div class="dropdown-content bg-dark">
+                        <a href="/planets/Mercury.html">Mercury</a>
+                        <a href="/planets/Venus.html">Venus</a>
+                        <a href="/planets/Earth.html">Earth</a>
+                        <a href="/planets/Mars.html">Mars</a>
+                        <a href="/planets/Jupiter.html">Jupiter</a>
+                        <a href="/planets/Saturn.html">Saturn</a>
+                        <a href="/planets/Uranus.html">Uranus</a>
+                        <a href="/planets/Neptune.html">Neptune</a>
+                        <a href="/planets/Overview.html">Quick Facts</a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="mainpage">
+      <div class="planetinfobox">
+        <div class="planetinfo">
+          <h1>Jupiter</h1>
+          <p class="category terrestrial-planet">
+            <img
+              style="width: 5%"
+              src="https://upload.wikimedia.org/wikipedia/commons/f/f4/White_Globe_Icon.png"
+              alt=""
+            /><span>&nbsp;Gas Giant</span>
+          </p>
+          <img
+            class="imgs"
+            src="https://eyes.nasa.gov/apps/orrery/photos/planets/jupiter.jpg"
+            alt=""
+          />
+          <p class="description">
+            Jupiter is more than twice as massive than the other planets of our
+            solar system combined. The giant planet's Great Red spot is a
+            centuries-old storm bigger than Earth.
+          </p>
+          <div class="quickfacts">
+            <div class="data-block" style="display: grid">
+              <div class="data color">11.85<span> Earth Years</span></div>
+              <div class="info" style="display: block"></div>
+            </div>
+
+            <div class="data-block" style="display: grid">
+              <div class="data color">5.2</div>
+              <div class="info" style="display: block">AU</div>
+            </div>
+            <div class="label-block" style="display: block">Length of Year</div>
+            <div class="label-block" style="display: block">
+              Distance from Sun
+            </div>
+
+            <div class="data-block" style="display: grid">
+              <div class="data color infolike">King of the roman gods</div>
+              <div class="info" style="display: none"></div>
+            </div>
+
+            <div class="data-block" style="display: grid">
+              <div class="data color moons">79</div>
+              <div class="info" style="display: block">Moon</div>
+            </div>
+            <div class="label-block" style="display: block">Namesake</div>
+            <div class="label-block" style="display: block">Moons</div>
+
+            <div class="data-block" style="display: grid">
+              <div class="data color">9.56 <span>Hours</span></div>
+              <div class="info" style="display: block"></div>
+            </div>
+
+            <div class="data-block" style="display: grid">
+              <div class="data color">69 911</div>
+              <div class="info" style="display: block">km</div>
+            </div>
+            <div class="label-block" style="display: block">Length of Day</div>
+            <div class="label-block" style="display: block">Raduis</div>
+          </div>
+          <div class="label-block" style="display: block">
+            AU: Astronomical Unit, the distance between the Earth and the Sun.
+          </div>
+        </div>
+      </div>
+
+      <div class="model-viewer-container">
+        <div class="time"><p id="gettime"></p></div>
+        <model-viewer
+          alt="A 3D model of Earth, our home planet."
+          background-color="black"
+          min-field-of-view="0.8rad"
+          max-field-of-view="0.8rad"
+          auto-rotate
+          camera-controls=""
+          camera-orbit=""
+          camera-target=""
+          controls=""
+          exposure="0.2"
+          id="mbmv"
+          ios-src="https://solarsystem.nasa.gov/system/resources/usdz_files/2375_Jupiter_1_142984.usdz"
+          poster="https://solarsystem.nasa.gov/system/resources/gltf_poster_files/2375_poster_jupiter.jpg"
+          preload=""
+          reveal="auto"
+          shadow-intensity="1"
+          shadow-softness="0"
+          src="https://solarsystem.nasa.gov/system/resources/gltf_files/2375_Jupiter_1_142984.glb"
+        ></model-viewer>
+      </div>
+    </div>
+
+    <a href="#bottom">
+      <div class="moreinfo"><p>MORE</p></div>
+    </a>
+    <div id="bottom" class="bottompart">
+      <div style="width: 75%">
+        <div class="row">
+          <div class="col-4">
+            <div class="count"><p>1</p></div>
+            <h3>THE GRANDEST PLANET</h3>
+            <p>
+              Eleven Earths could fit across Jupiter’s equator. If Earth were
+              the size of a grape, Jupiter would be the size of a basketball.
+            </p>
+          </div>
+          <div class="col-4">
+            <div class="count"><p>2</p></div>
+            <h3>FIFTH PLANET FROM OUR STAR</h3>
+            <p>
+              Jupiter orbits about 484 million miles (778 million kilometers) or
+              5.2 Astronomical Units (AU) from our Sun (Earth is one AU from the
+              Sun).
+            </p>
+          </div>
+          <div class="col-4">
+            <div class="count"><p>3</p></div>
+            <h3>SHORT DAY/LONG YEAR</h3>
+            <p>
+              Jupiter rotates once about every 10 hours (a Jovian day), but
+              takes about 12 Earth years to complete one orbit of the Sun (a
+              Jovian year).
+            </p>
+          </div>
+          <div class="col-4">
+            <div class="count"><p>4</p></div>
+            <h3>WHAT'S INSIDE</h3>
+            <p>
+              Jupiter is a gas giant and so lacks an Earth-like surface. If it
+              has a solid inner core at all, it’s likely only about the size of
+              Earth.
+            </p>
+          </div>
+          <div class="col-4">
+            <div class="count"><p>5</p></div>
+            <h3>MASSIVE WORLD, LIGHT ELEMENTS</h3>
+            <p>
+              Jupiter's atmosphere is made up mostly of hydrogen (H2) and helium
+              (He).
+            </p>
+          </div>
+          <div class="col-4">
+            <div class="count"><p>6</p></div>
+            <h3>SUPER STORM</h3>
+            <p>
+              Jupiter's Great Red Spot is a gigantic storm that’s about twice
+              the size of Earth and has raged for over a century.
+            </p>
+          </div>
+          <div class="col-4">
+            <div class="count"><p>7</p></div>
+            <h3>RINGED WORLD</h3>
+            <p>
+              In 1979 the Voyager mission discovered Jupiter’s faint ring
+              system. All four giant planets in our solar system have ring
+              systems.
+            </p>
+          </div>
+          <div class="col-4">
+            <div class="count"><p>8</p></div>
+            <h3>EXPLORING JUPITER</h3>
+            <p>
+              Nine spacecraft have visited Jupiter. Seven flew by and two have
+              orbited the gas giant. Juno, the most recent, arrived at Jupiter
+              in 2016.
+            </p>
+          </div>
+          <div class="col-4">
+            <div class="count"><p>9</p></div>
+            <h3>INGREDIENTS FOR LIFE?</h3>
+            <p>
+              Jupiter cannot support life as we know it. But some of Jupiter's
+              moons have oceans beneath their crusts that might support life.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.9/webcomponents-bundle.js"></script>
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://unpkg.com/resize-observer-polyfill@1.5.1/dist/ResizeObserver.js"></script>
+    <script src="https://unpkg.com/fullscreen-polyfill@1.0.2/dist/fullscreen.polyfill.js"></script>
+    <script>
+      function scroll() {
+        $("html,body").animate(
+          {
+            scrollTop: $(".bottompart").offset().top,
+          },
+          "slow"
+        );
+      }
+    </script>
+    <script
+      src="https://unpkg.com/@google/model-viewer@0.8.1/dist/model-viewer.js"
+      type="module"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/@google/model-viewer@0.8.1/dist/model-viewer-legacy.js"
+    ></script>
+    <script>
+      function zero_first_format(value) {
+        if (value < 10) {
+          value = "0" + value;
+        }
+        return value;
+      }
+
+      function date_time() {
+        var current_datetime = new Date();
+        var day = zero_first_format(current_datetime.getDate());
+        var month = zero_first_format(current_datetime.getMonth() + 1);
+        var year = current_datetime.getFullYear();
+        var hours = zero_first_format(current_datetime.getHours());
+        var minutes = zero_first_format(current_datetime.getMinutes());
+        var seconds = zero_first_format(current_datetime.getSeconds());
+
+        return (
+          day +
+          "." +
+          month +
+          "." +
+          year +
+          " " +
+          hours +
+          ":" +
+          minutes +
+          ":" +
+          seconds
+        );
+      }
+      var d = new Date();
+      setInterval(function () {
+        document.getElementById("gettime").innerHTML = date_time();
+      }, 1000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+SELECT Mob, killed
+FROM (
+SELECT p.acc_id, p.name "Player", m.mob_id, m.name "Mob", 
+count(m.mob_id) OVER (PARTITION BY k.mob_id) as "killed" 
+FROM Kills_log k, Players p, Mobs m
+WHERE k.acc_id = p.acc_id AND k.mob_id = m.mob_id
+)
+WHERE acc_id = 1
+GROUP BY mob_id;

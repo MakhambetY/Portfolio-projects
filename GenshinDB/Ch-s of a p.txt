@@ -1,0 +1,3 @@
+SELECT ch.name "Character", ch_lvl, b.constellations, rarity, e.name 
+FROM Builds b, Characters ch, Players p, Elements e
+WHERE b.ch_id = ch.ch_id AND ch.el_id = e.el_id AND b.acc_id = p.acc_id AND p.user_id = 1 AND p.server_id = 2;
